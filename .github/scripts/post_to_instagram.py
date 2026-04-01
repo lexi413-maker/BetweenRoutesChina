@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
-"""
-Between Routes China — Instagram Auto Publisher
-"""
-import os, sys, json, re, glob, datetime
+"""Between Routes China — Instagram Auto Publisher"""
+import os, sys, json, re, glob, datetime, time
 import urllib.request, urllib.parse, urllib.error, ssl
 
 IG_TOKEN   = os.environ["INSTAGRAM_ACCESS_TOKEN"]
@@ -27,7 +25,6 @@ def http_post(url, params):
             return json.loads(r.read())
     except urllib.error.HTTPError as e:
         body = e.read().decode()
-        print(f"HTTP {e.code}: {body}")
         return json.loads(body) if body else {}
 
 # 1. Find today's script
@@ -57,14 +54,13 @@ body = "---".join(parts[2:]).strip()
 search_match = re.search(r"^Search:\s*(.+)$", body, re.MULTILINE)
 search_terms = search_match.group(1).strip() if search_match else "china business"
 
-lines = [l for l in body.split("\n") if not l.startswith("IMAGE:") and not l.startswith("Search:")]
+lines = [l for l in body.split("\n") if not l.startswith("IMAGE:") and not l.startswith("Search:") and l.strip() != "---"]
 caption = "\n".join(lines).strip()
 print(f"Terms: {search_terms}")
-print(f"Caption: {caption[:60]}...")
+print(f"Caption: {caption[:80]}...")
 
-# 3. Get image — try Pexels, fallback to Unsplash source
+# 3. Get image — try Pexels, fallback to hardcoded pro image
 image_url = None
-
 if PEXELS_KEY:
     try:
         purl = "https://api.pexels.com/v1/search?" + urllib.parse.urlencode({
@@ -74,19 +70,16 @@ if PEXELS_KEY:
         photos = data.get("photos", [])
         if photos:
             image_url = photos[0]["src"]["large2x"]
-            print(f"Pexels image: {image_url[:60]}...")
-        else:
-            print("Pexels: no results")
+            print(f"Pexels image found")
     except Exception as e:
         print(f"Pexels failed: {e}")
 
 if not image_url:
-    # Fallback: use a reliable public image based on search category
-    fallback_queries = urllib.parse.quote(search_terms.replace(" ", "-"))
-    image_url = f"https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg"
-    print(f"Using fallback image")
+    # Reliable fallback: professional business photo
+    image_url = "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    print("Using fallback image")
 
-print(f"Image: {image_url[:80]}")
+print(f"Image: {image_url[:70]}...")
 
 # 4. Create media container
 print("Creating media container...")
@@ -100,7 +93,25 @@ if not creation_id:
     sys.exit(1)
 print(f"Container ID: {creation_id}")
 
-# 5. Publish
+# 5. Wait for container to be ready (poll up to 60s)
+print("Waiting for media to process...")
+for attempt in range(12):
+    time.sleep(5)
+    status_data = http_get(
+        f"https://graph.instagram.com/v21.0/{creation_id}?fields=status_code&access_token={IG_TOKEN}"
+    )
+    status = status_data.get("status_code", "UNKNOWN")
+    print(f"  Status [{attempt+1}]: {status}")
+    if status == "FINISHED":
+        break
+    if status == "ERROR":
+        print(f"Container error: {status_data}")
+        sys.exit(1)
+else:
+    print("Timeout waiting for media to process")
+    sys.exit(1)
+
+# 6. Publish
 print("Publishing...")
 result = http_post(
     f"https://graph.instagram.com/v21.0/{IG_USER_ID}/media_publish",
