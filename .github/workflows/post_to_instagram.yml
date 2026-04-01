@@ -1,0 +1,26 @@
+name: Auto Post to Instagram
+
+on:
+  schedule:
+    # 9:00am CET (8:00am UTC winter / 7:00am UTC summer)
+    # Tue=2, Wed=3, Fri=5, Sun=0
+    - cron: '0 8 * * 0,2,3,5'
+  workflow_dispatch:
+    inputs:
+      test_date:
+        description: 'Test with specific date (YYYY-MM-DD), leave empty for today'
+        required: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Post to Instagram
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          TEST_DATE: ${{ github.event.inputs.test_date }}
+        run: python3 .github/scripts/post_to_instagram.py
