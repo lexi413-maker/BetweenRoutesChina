@@ -1,5 +1,5 @@
 ---
-date: 2026-04-14 · 08:00 CET
+date: 2026-04-10 · 09:00 CET
 pillar: How We Work
 format: Static
 ---
