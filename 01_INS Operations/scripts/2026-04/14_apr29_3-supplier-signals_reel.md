@@ -1,5 +1,5 @@
 ---
-date: 2026-04-29 · 08:00 CET
+date: 2026-04-26 · 09:00 CET
 pillar: How We Work
 format: Reel
 ---
