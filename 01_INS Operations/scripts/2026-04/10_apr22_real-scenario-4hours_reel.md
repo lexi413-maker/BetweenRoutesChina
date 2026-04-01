@@ -1,5 +1,5 @@
 ---
-date: 2026-04-22 · 08:00 CET
+date: 2026-04-19 · 09:00 CET
 pillar: Stories & Scenarios
 format: Reel
 ---
