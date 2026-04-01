@@ -1,5 +1,5 @@
 ---
-date: 2026-04-19 · 08:00 CET
+date: 2026-04-15 · 09:00 CET
 pillar: Stories & Scenarios
 format: Static
 engagement: Poll
