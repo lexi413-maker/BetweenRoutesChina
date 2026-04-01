@@ -1,5 +1,5 @@
 ---
-date: 2026-05-01 · 08:00 CET
+date: 2026-04-28 · 09:00 CET
 pillar: How We Work
 format: Static
 note: Golden Week content — factories closed
