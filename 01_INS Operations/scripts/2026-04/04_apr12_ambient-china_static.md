@@ -1,5 +1,5 @@
 ---
-date: 2026-04-12 · 08:00 CET
+date: 2026-04-08 · 09:00 CET
 pillar: Ambient China
 format: Static
 ---
