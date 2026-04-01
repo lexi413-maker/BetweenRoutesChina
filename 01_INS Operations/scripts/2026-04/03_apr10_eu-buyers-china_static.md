@@ -1,5 +1,5 @@
 ---
-date: 2026-04-10 · 08:00 CET
+date: 2026-04-07 · 09:00 CET
 pillar: China Unlocked
 format: Static
 trend: EU-China trade / de-risking discourse
