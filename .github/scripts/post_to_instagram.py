@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Between Routes China — Instagram Auto Publisher
-Reads today\'s script from 01_INS Operations/scripts/YYYY-MM/
+Reads today's script from 01_INS Operations/scripts/YYYY-MM/
 Fetches image from Pexels, posts to Instagram via Graph API.
 """
 import os, sys, json, re, glob, datetime
@@ -30,7 +30,7 @@ def post(url, params):
     except urllib.error.HTTPError as e:
         return json.loads(e.read())
 
-# ── 1. Find today\'s script ──────────────────────────────────────
+# 1. Find today's script
 today = TEST_DATE or datetime.date.today().strftime("%Y-%m-%d")
 print(f"Looking for post date: {today}")
 
@@ -50,15 +50,13 @@ if not target:
 path, content = target
 print(f"Found: {path}")
 
-# ── 2. Parse script ───────────────────────────────────────────────
+# 2. Parse script
 parts = content.split("---")
-# parts[0] = empty, parts[1] = frontmatter, parts[2+] = body
 body = "---".join(parts[2:]).strip()
 
 search_match = re.search(r"^Search:\s*(.+)$", body, re.MULTILINE)
 search_terms = search_match.group(1).strip() if search_match else "china business professional"
 
-# Caption = body minus IMAGE and Search lines, stripped
 lines = []
 for line in body.split("\n"):
     if line.startswith("IMAGE:") or line.startswith("Search:"):
@@ -69,7 +67,7 @@ caption = "\n".join(lines).strip()
 print(f"Search terms: {search_terms}")
 print(f"Caption preview: {caption[:80]}...")
 
-# ── 3. Get image from Pexels ──────────────────────────────────────
+# 3. Get image from Pexels
 pexels_url = "https://api.pexels.com/v1/search?" + urllib.parse.urlencode({
     "query": search_terms,
     "per_page": 1,
@@ -84,7 +82,7 @@ if not photos:
 image_url = photos[0]["src"]["large2x"]
 print(f"Image URL: {image_url}")
 
-# ── 4. Create Instagram media container ───────────────────────────
+# 4. Create Instagram media container
 container = post(
     f"https://graph.instagram.com/v21.0/{IG_USER_ID}/media",
     {"image_url": image_url, "caption": caption, "access_token": IG_TOKEN}
@@ -95,13 +93,14 @@ if not creation_id:
     sys.exit(1)
 print(f"Media container created: {creation_id}")
 
-# ── 5. Publish ────────────────────────────────────────────────────
+# 5. Publish
 result = post(
     f"https://graph.instagram.com/v21.0/{IG_USER_ID}/media_publish",
     {"creation_id": creation_id, "access_token": IG_TOKEN}
 )
 if "id" in result:
-    print(f"Posted successfully! Instagram post ID: {result[\'id\']}")
+    post_id = result["id"]
+    print(f"Posted successfully! Instagram post ID: {post_id}")
 else:
     print(f"Publish error: {result}")
     sys.exit(1)
