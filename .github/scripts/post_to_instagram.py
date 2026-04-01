@@ -33,38 +33,43 @@ print(f"Date: {today}")
 
 scripts = glob.glob("01_INS Operations/scripts/**/*.md", recursive=True)
 target = None
-for path in sorted(scripts):
-    with open(path, encoding="utf-8") as f:
+for fpath in sorted(scripts):
+    with open(fpath, encoding="utf-8") as f:
         content = f.read()
     if f"date: {today}" in content:
-        target = (path, content)
+        target = (fpath, content)
         break
 
 if not target:
     print(f"No post for {today}. Done.")
     sys.exit(0)
 
-path, content = target
-print(f"Script: {path}")
+fpath, content = target
+print(f"Script: {fpath}")
 
 # 2. Parse caption and image search terms
 parts = content.split("---")
 body = "---".join(parts[2:]).strip()
 
 search_match = re.search(r"^Search:\s*(.+)$", body, re.MULTILINE)
-search_terms = search_match.group(1).strip() if search_match else "china business"
+raw_terms = search_match.group(1).strip() if search_match else "business meeting"
+
+# Always include china context in image search
+china_keywords = ["china", "chinese", "shanghai", "beijing", "asian", "shenzhen"]
+has_china = any(kw in raw_terms.lower() for kw in china_keywords)
+search_terms = raw_terms if has_china else f"china {raw_terms}"
 
 lines = [l for l in body.split("\n") if not l.startswith("IMAGE:") and not l.startswith("Search:") and l.strip() != "---"]
 caption = "\n".join(lines).strip()
 print(f"Terms: {search_terms}")
 print(f"Caption: {caption[:80]}...")
 
-# 3. Get image — try Pexels, fallback to hardcoded pro image
+# 3. Get image — try Pexels, fallback to hardcoded Shanghai business image
 image_url = None
 if PEXELS_KEY:
     try:
         purl = "https://api.pexels.com/v1/search?" + urllib.parse.urlencode({
-            "query": search_terms, "per_page": 1, "orientation": "square"
+            "query": search_terms, "per_page": 3, "orientation": "square"
         })
         data = http_get(purl, headers={"Authorization": PEXELS_KEY})
         photos = data.get("photos", [])
@@ -75,9 +80,9 @@ if PEXELS_KEY:
         print(f"Pexels failed: {e}")
 
 if not image_url:
-    # Reliable fallback: professional business photo
-    image_url = "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-    print("Using fallback image")
+    # Fallback: Shanghai skyline / China business scene
+    image_url = "https://images.pexels.com/photos/2850290/pexels-photo-2850290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    print("Using fallback image (Shanghai)")
 
 print(f"Image: {image_url[:70]}...")
 
