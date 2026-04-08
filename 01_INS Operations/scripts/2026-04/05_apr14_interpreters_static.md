@@ -3,7 +3,7 @@ date: 2026-04-10 · 09:00 CET
 pillar: How We Work
 format: Static
 ---
-IMAGE: https://unsplash.com/s/photos/business-meeting-interpretation
+IMAGE: https://images.pexels.com/photos/7640741/pexels-photo-7640741.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 Search: professional interpreter business meeting conference multilingual
 
 ---

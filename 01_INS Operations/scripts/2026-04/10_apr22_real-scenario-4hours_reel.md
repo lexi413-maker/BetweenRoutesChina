@@ -3,7 +3,7 @@ date: 2026-04-19 · 09:00 CET
 pillar: Stories & Scenarios
 format: Reel
 ---
-IMAGE: https://unsplash.com/s/photos/logistics-operations-team
+IMAGE: https://images.pexels.com/photos/14554082/pexels-photo-14554082.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 Search: logistics team problem solving operations china urban city
 
 ---

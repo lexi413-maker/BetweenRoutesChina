@@ -4,7 +4,7 @@ pillar: Stories & Scenarios
 format: Static
 engagement: Poll
 ---
-IMAGE: https://unsplash.com/s/photos/business-decision-thinking
+IMAGE: https://images.pexels.com/photos/27972376/pexels-photo-27972376.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 Search: business person thinking decision professional office
 
 ---

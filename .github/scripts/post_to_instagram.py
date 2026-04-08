@@ -47,14 +47,17 @@ if not target:
 fpath, content = target
 print(f"Script: {fpath}")
 
-# 2. Parse caption and image search terms
+# 2. Parse caption and image fields
 parts = content.split("---")
 body = "---".join(parts[2:]).strip()
 
-search_match = re.search(r"^Search:\s*(.+)$", body, re.MULTILINE)
-raw_terms = search_match.group(1).strip() if search_match else "business meeting"
+# Check for direct image URL in IMAGE: field (Pexels CDN URLs)
+image_match = re.search(r"^IMAGE:\s*(https://images\.[^\s]+)$", body, re.MULTILINE)
+direct_image_url = image_match.group(1).strip() if image_match else None
 
-# Always include china context in image search
+search_match = re.search(r"^Search:\s*(.+)$", body, re.MULTILINE)
+raw_terms = search_match.group(1).strip() if search_match else "china business"
+
 china_keywords = ["china", "chinese", "shanghai", "beijing", "asian", "shenzhen"]
 has_china = any(kw in raw_terms.lower() for kw in china_keywords)
 search_terms = raw_terms if has_china else f"china {raw_terms}"
@@ -64,9 +67,13 @@ caption = "\n".join(lines).strip()
 print(f"Terms: {search_terms}")
 print(f"Caption: {caption[:80]}...")
 
-# 3. Get image — try Pexels, fallback to hardcoded Shanghai business image
+# 3. Get image — priority: direct URL in .md > Pexels API > fallback
 image_url = None
-if PEXELS_KEY:
+
+if direct_image_url:
+    image_url = direct_image_url
+    print(f"Using embedded image URL")
+elif PEXELS_KEY:
     try:
         purl = "https://api.pexels.com/v1/search?" + urllib.parse.urlencode({
             "query": search_terms, "per_page": 3, "orientation": "square"
@@ -80,8 +87,8 @@ if PEXELS_KEY:
         print(f"Pexels failed: {e}")
 
 if not image_url:
-    # Fallback: Shanghai skyline / China business scene
-    image_url = "https://images.pexels.com/photos/2850290/pexels-photo-2850290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    # Fallback: Shanghai night skyline
+    image_url = "https://images.pexels.com/photos/19243747/pexels-photo-19243747.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
     print("Using fallback image (Shanghai)")
 
 print(f"Image: {image_url[:70]}...")

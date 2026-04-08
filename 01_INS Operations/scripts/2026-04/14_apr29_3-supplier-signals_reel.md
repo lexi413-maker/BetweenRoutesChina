@@ -3,7 +3,7 @@ date: 2026-04-26 · 09:00 CET
 pillar: How We Work
 format: Reel
 ---
-IMAGE: https://unsplash.com/s/photos/factory-inspection
+IMAGE: https://images.pexels.com/photos/17382268/pexels-photo-17382268.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 Search: factory inspection checklist quality control china professional supplier
 
 ---

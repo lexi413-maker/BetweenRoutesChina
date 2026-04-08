@@ -3,7 +3,7 @@ date: 2026-04-12 · 09:00 CET
 pillar: China Unlocked
 format: Reel
 ---
-IMAGE: https://unsplash.com/s/photos/shenzhen-china-city
+IMAGE: https://images.pexels.com/photos/33020857/pexels-photo-33020857.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 Search: shenzhen modern skyline china city aerial view
 
 ---

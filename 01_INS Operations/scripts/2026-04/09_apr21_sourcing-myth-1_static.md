@@ -4,7 +4,7 @@ pillar: China Unlocked
 format: Static
 series: Sourcing Myths 1/3
 ---
-IMAGE: https://unsplash.com/s/photos/quality-control-manufacturing
+IMAGE: https://images.pexels.com/photos/36609496/pexels-photo-36609496.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 Search: factory quality control inspection checklist china manufacturing
 
 ---

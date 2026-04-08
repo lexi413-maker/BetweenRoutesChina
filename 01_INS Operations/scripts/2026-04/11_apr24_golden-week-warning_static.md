@@ -3,7 +3,7 @@ date: 2026-04-21 · 09:00 CET
 pillar: China Unlocked
 format: Static
 ---
-IMAGE: https://unsplash.com/s/photos/china-holiday-lantern
+IMAGE: https://images.pexels.com/photos/36541913/pexels-photo-36541913.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 Search: china holiday celebration lantern festival calendar
 
 ---

@@ -4,7 +4,7 @@ pillar: How We Work
 format: Static
 note: Golden Week content — factories closed
 ---
-IMAGE: https://unsplash.com/s/photos/business-planning-desk
+IMAGE: https://images.pexels.com/photos/57690/pexels-photo-57690.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 Search: planning desk calendar strategy notes business professional
 
 ---

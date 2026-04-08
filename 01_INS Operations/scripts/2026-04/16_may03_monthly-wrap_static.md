@@ -3,7 +3,7 @@ date: 2026-04-29 · 09:00 CET
 pillar: Stories & Scenarios
 format: Static
 ---
-IMAGE: https://unsplash.com/s/photos/team-review-results
+IMAGE: https://images.pexels.com/photos/8837261/pexels-photo-8837261.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 Search: business team review results smiling professional office meeting
 
 ---

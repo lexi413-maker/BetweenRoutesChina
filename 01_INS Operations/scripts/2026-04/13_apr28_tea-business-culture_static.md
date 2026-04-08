@@ -3,7 +3,7 @@ date: 2026-04-24 · 09:00 CET
 pillar: China Unlocked
 format: Static
 ---
-IMAGE: https://unsplash.com/s/photos/chinese-tea-ceremony
+IMAGE: https://images.pexels.com/photos/18426652/pexels-photo-18426652.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 Search: chinese tea ceremony business meeting traditional setting professional
 
 ---

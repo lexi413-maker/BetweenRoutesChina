@@ -3,7 +3,7 @@ date: 2026-04-08 · 09:00 CET
 pillar: Ambient China
 format: Static
 ---
-IMAGE: https://unsplash.com/s/photos/china-tea-mountains
+IMAGE: https://images.pexels.com/photos/17468693/pexels-photo-17468693.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 Search: misty mountains tea plantation china sunrise atmospheric fog
 
 ---

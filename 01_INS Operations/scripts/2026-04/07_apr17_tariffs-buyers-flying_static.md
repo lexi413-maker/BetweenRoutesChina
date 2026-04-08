@@ -4,7 +4,7 @@ pillar: China Unlocked
 format: Static
 trend: Global tariff increases 2026
 ---
-IMAGE: https://unsplash.com/s/photos/international-business-travel-airport
+IMAGE: https://images.pexels.com/photos/33407836/pexels-photo-33407836.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 Search: international business travel airport departure professional
 
 ---
